@@ -1,0 +1,41 @@
+FROM quay.io/fedora/fedora:latest
+MAINTAINER Niranjan MR <mrniranjan@fedoraproject.org>
+LABEL version="1.0"
+
+ENV container docker
+
+# install packages
+RUN dnf clean all && \
+    dnf install -y wget procps-ng git systemd emacs ShellCheck git vim-enhanced golang-bin golang pre-commit
+
+RUN useradd -ms /bin/bash mniranja
+
+
+#create directories
+RUN mkdir -p /home/mniranja \
+    mkdir -p /home/mniranja/.emacs.d
+
+RUN chown -R mniranja:mniranja /home/mniranja
+# switch user 
+USER mniranja
+  
+# Workring directory
+WORKDIR  /home/mniranja
+
+ENV GOPATH /home/mniranja/go
+ENV GOBIN $GOPATH/bin
+ENV PATH $GOBIN:$PATH
+
+# install ginkgo and gomega
+RUN go install github.com/onsi/ginkgo/v2/ginkgo@latest && \
+    go install github.com/onsi/gomega@latest; exit 0
+
+# install gopls
+RUN go install golang.org/x/tools/gopls@latest
+
+# copy emacs 
+COPY --chown=mniranja:mniranja emacs /home/mniranja/.emacs
+
+# Install emacs packages
+RUN emacs --batch -l /home/mniranja/.emacs
+

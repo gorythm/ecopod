@@ -1,0 +1,17 @@
+FROM quay.io/fedora/fedora:latest
+MAINTAINER Niranjan MR <mrniranjan@fedoraproject.org>
+LABEL version="1.0"
+
+# install packages
+RUN dnf clean all && \
+    dnf install -y golang-bin golang pre-commit
+
+ENV GOPATH /root/go
+ENV GOBIN $GOPATH/bin
+ENV PATH $GOBIN:$PATH
+
+
+# install gopls
+RUN GOPROXY=https://proxy.golang.org GO111MODULE=on go install golang.org/x/tools/gopls@latest
+
+CMD /root/go/bin/gopls serve -rpc.trace --logfile=/tmp/mylog -listen="0.0.0.0:7050" -debug=0.0.0.0:6060
