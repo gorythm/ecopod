@@ -6,23 +6,9 @@ ENV container docker
 
 # install packages
 RUN dnf clean all && \
-    dnf install -y wget procps-ng git systemd emacs ShellCheck git vim-enhanced golang-bin golang pre-commit
+    dnf install -y wget bash procps-ng git systemd emacs ShellCheck git vim-enhanced golang-bin golang pre-commit
 
-RUN useradd -ms /bin/bash foobar
-
-
-#create directories
-RUN mkdir -p /home/foobar \
-    mkdir -p /home/foobar/.emacs.d
-
-RUN chown -R foobar:foobar /home/foobar
-# switch user 
-USER foobar
-  
-# Workring directory
-WORKDIR  /home/foobar
-
-ENV GOPATH /home/foobar/go
+ENV GOPATH /root/go
 ENV GOBIN $GOPATH/bin
 ENV PATH $GOBIN:$PATH
 
@@ -34,8 +20,8 @@ RUN go install github.com/onsi/ginkgo/v2/ginkgo@latest && \
 RUN go install golang.org/x/tools/gopls@latest
 
 # copy emacs 
-COPY --chown=foobar:foobar emacs /home/foobar/.emacs
+COPY emacs /root/.emacs
 
 # Install emacs packages
-RUN emacs --batch -l /home/foobar/.emacs
+RUN emacs --batch -l /root/.emacs
 
