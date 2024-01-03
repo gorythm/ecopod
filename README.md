@@ -20,9 +20,15 @@ Ecopod contains 2 containers
 `podman build -t ide ide/`
 
 ## Creating Pod
-podman pod create --name ecopod -p 7050:7050 -p 6060:6060
-podman run -dt --pod ecopod -v '/code/myworkspace/:/code/myworkspace/:z,ro'  localhost/lsp:latest
-podman run -dt --pod ecopod -v '/code/myworkspace/:/code/myworkspace/:z,rw'  localhost/ecopod:latest
+Create a pod called ecopod exposing ports 7050 on which gopls language server
+will be listening and port 6060 for tracing and other debugging details
+`podman pod create --name ecopod -p 7050:7050 -p 6060:6060`
+
+create a container using lsp server container image
+`podman run -dt --pod ecopod -v '/code/myworkspace/:/code/myworkspace/:z,ro'  localhost/lsp:latest`
+
+create a container using ide container image
+`podman run -dt --pod ecopod -v '/code/myworkspace/:/code/myworkspace/:z,rw'  localhost/ecopod:latest`
 
 ## start emacs
 podman exec -it <ecopod container id> bash
