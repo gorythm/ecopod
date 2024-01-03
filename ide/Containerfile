@@ -12,6 +12,10 @@ ENV GOPATH /root/go
 ENV GOBIN $GOPATH/bin
 ENV PATH $GOBIN:$PATH
 
+# create emacs directories
+RUN mkdir -p ~/.emacs.d/lisp \
+    mkdir  ~/.emacs.d/backup
+
 # install ginkgo and gomega
 RUN go install github.com/onsi/ginkgo/v2/ginkgo@latest && \
     go install github.com/onsi/gomega@latest; exit 0
@@ -19,9 +23,12 @@ RUN go install github.com/onsi/ginkgo/v2/ginkgo@latest && \
 # install gopls
 RUN go install golang.org/x/tools/gopls@latest
 
-# copy emacs 
-COPY emacs /root/.emacs
+# copy basic configuration
+COPY init.el /root/.emacs.d/init.el
+
+# copy lsp mode configuration
+COPY lsp.el /root/.emacs.d/lisp/lsp.el
 
 # Install emacs packages
-RUN emacs --batch -l /root/.emacs
+RUN emacs --batch -l /root/.emacs.d/init.el
 
