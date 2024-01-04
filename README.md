@@ -31,7 +31,7 @@ create a container using ide container image
 `podman run -dt --pod ecopod -v '/tmp/code/myworkspace/:/tmp/code/myworkspace/:z,rw'  localhost/ecopod:latest`
 
 ## start emacs
-podman exec -it <ecopod container id> emacs -nw /tmp/code/myworksapce/fun.go
+`podman exec -it <ecopod container id> emacs -nw /tmp/code/myworksapce/fun.go`
 
 ![function lookup](./images/emacs-1.png)
 
