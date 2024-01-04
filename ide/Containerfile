@@ -2,11 +2,9 @@ FROM quay.io/fedora/fedora:latest
 MAINTAINER Niranjan MR <mrniranjan@fedoraproject.org>
 LABEL version="1.0"
 
-ENV container docker
-
 # install packages
 RUN dnf clean all && \
-    dnf install -y wget bash procps-ng git systemd emacs ShellCheck git vim-enhanced golang-bin golang pre-commit
+    dnf install -y wget bash git emacs ShellCheck git vim-enhanced golang-bin golang pre-commit patch
 
 ENV GOPATH /root/go
 ENV GOBIN $GOPATH/bin
