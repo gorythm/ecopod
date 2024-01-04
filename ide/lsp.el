@@ -40,3 +40,6 @@
 
 ;; Start LSP Mode and YASnippet mode
 (add-hook 'go-mode-hook #'yas-minor-mode)
+
+(defalias 'lsp--cur-line-diagnotics 'lsp--cur-line-diagnostics)
+(setq lsp-enable-file-watchers nil)
