@@ -57,7 +57,7 @@
   :config
   (ivy-mode 1))
 
-(use-package all-the-icons)                                                                                                    
+(use-package all-the-icons)
 
 
 (use-package doom-modeline

@@ -43,4 +43,3 @@ create a container using ide container image
 * Using podman desktop
 * Currently Pod aims to get emacs ide working from a container, and still requires more fine tuning
 * In future this can be extended to other ide's like vim
-
