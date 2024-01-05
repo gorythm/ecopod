@@ -1,4 +1,4 @@
-;; Enable lsp mode and other dependencies for golang 
+;; Enable lsp mode and other dependencies for golang
 
 (setq package-list '(company yasnippet flycheck go-mode lsp-mode lsp-ui ))
 

@@ -29,4 +29,3 @@ COPY lsp.el /root/.emacs.d/lisp/lsp.el
 
 # Install emacs packages
 RUN emacs --batch -l /root/.emacs.d/init.el
-
