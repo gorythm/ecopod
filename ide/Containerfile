@@ -9,6 +9,7 @@ RUN dnf clean all && \
 ENV GOPATH /root/go
 ENV GOBIN $GOPATH/bin
 ENV PATH $GOBIN:$PATH
+ENV TERM "screen-256color"
 
 # create emacs directories
 RUN mkdir -p ~/.emacs.d/lisp \
