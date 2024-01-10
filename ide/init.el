@@ -14,16 +14,8 @@
 
 (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 
-;;(set-face-attribute 'default nil :font "Fira Code Retina" :height 280)
-
-;;(load-theme 'wombat)
-
-;; Make ESC quit prompts
-(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-
-;;(package-initialize)
-;;(elpy-enable)
-
+;;stop describe-function etc from converting many quote characters in docstring.
+(setq text-quoting-style 'grave)
 
 ;; Initialize package sources
 (require 'package)
