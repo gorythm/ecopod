@@ -4,7 +4,7 @@ LABEL version="1.0"
 
 # install packages
 RUN dnf clean all && \
-    dnf install -y wget bash git emacs ShellCheck git vim-enhanced golang-bin golang pre-commit patch
+    dnf install -y wget bash git tig emacs ShellCheck git vim-enhanced golang-bin golang pre-commit patch
 
 ENV GOPATH /root/go
 ENV GOBIN $GOPATH/bin
