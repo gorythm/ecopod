@@ -1,0 +1,17 @@
+# .bashrc
+
+# User specific environment
+PATH="$HOME/.local/bin:$HOME/bin:$PATH:$HOME/go/bin"
+export PATH
+
+# Aliases
+alias dir='dir --color=auto'
+alias grep='grep --color=auto'
+alias ls='ls --color=auto'
+alias ll='ls -l'
+
+# Git
+source /usr/share/git-core/contrib/completion/git-prompt.sh
+export GIT_PS1_SHOWDIRTYSTATE=true
+export GIT_PS1_SHOWUNTRACKEDFILES=true
+export PS1='[\[\e[0;32m\]\u\[\e[0m\]@\[\e[0;94m\]\h\[\e[0m\] \W\[\e[0;33m\]$(__git_ps1 " (%s)")\[\e[0m\]]\[\e[0;32m\]\$ \[\e[0m\]'
