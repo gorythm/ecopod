@@ -11,13 +11,8 @@ ENV GOBIN $GOPATH/bin
 ENV PATH $GOBIN:$PATH
 ENV TERM "screen-256color"
 
-
 # set environment variables and scripts
-RUN echo "source /usr/share/git-core/contrib/completion/git-prompt.sh" > ~/.bashrc
-
-ENV GIT_PS1_SHOWUNTRACKEDFILES=true
-ENV GIT_PS1_SHOWDIRTYSTATE=true
-ENV PS1='[\[\e[0;32m\]\u\[\e[0m\]@\[\e[0;94m\]\h\[\e[0m\] \W\[\e[0;33m\]$(__git_ps1 " (%s)")\[\e[0m\]]\[\e[0;32m\]\$ \[\e[0m\]'
+COPY bashrc /root/.bashrc
 
 # create emacs directories
 RUN mkdir -p ~/.emacs.d/lisp \
