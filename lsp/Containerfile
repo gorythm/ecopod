@@ -6,6 +6,12 @@ LABEL version="1.0"
 RUN dnf clean all && \
     dnf install -y golang-bin golang pre-commit procps-ng bind-utils
 
+# copy golang-1.22 RPMS
+RUN dnf localinstall  https://kojipkgs.fedoraproject.org//packages/golang/1.22.4/1.fc40/noarch/golang-src-1.22.4-1.fc40.noarch.rpm \
+         https://kojipkgs.fedoraproject.org//packages/golang/1.22.4/1.fc40/x86_64/golang-1.22.4-1.fc40.x86_64.rpm \
+	 https://kojipkgs.fedoraproject.org//packages/golang/1.22.4/1.fc40/x86_64/golang-bin-1.22.4-1.fc40.x86_64.rpm
+
+
 ENV GOPATH /root/go
 ENV GOBIN $GOPATH/bin
 ENV PATH $GOBIN:$PATH
@@ -13,5 +19,6 @@ ENV PATH $GOBIN:$PATH
 
 # install gopls
 RUN GO111MODULE=on go install golang.org/x/tools/gopls@latest
+RUN GO111MODULE=on go install github.com/nametake/golangci-lint-langserver@latest
 
 CMD /root/go/bin/gopls serve -rpc.trace --logfile=/tmp/mylog -listen="0.0.0.0:7050" -debug=0.0.0.0:6060
